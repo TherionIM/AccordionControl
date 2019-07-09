@@ -1,0 +1,310 @@
+﻿<Window x:Class="AccordionTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Controls;assembly=Controls"
+        xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Layout.Toolkit"
+        Title="Accordion Test" Height="350" Width="902"
+        WindowStartupLocation="CenterScreen">    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="151*"/>
+            <RowDefinition Height="149*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="UP:" />        
+        <controls:Accordion x:Name="myAccordionUp" ExpandDirection="Up" Grid.Row="1" Grid.Column="0">
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1" />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>                    
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </controls:AccordionItem>
+            <controls:AccordionItem>
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </controls:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </controls:AccordionItem>
+            <controls:AccordionItem>
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </controls:AccordionItem>           
+            <TextBlock Text="Test" />
+        </controls:Accordion>
+        <toolkit:Accordion ExpandDirection="Up" Grid.Row="2" Grid.Column="0">
+            <toolkit:AccordionItem>
+                <toolkit:AccordionItem.Header>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1" Margin="177,0,-177,0" />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem x:Name="ToolkitItem">
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </toolkit:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <TextBlock Text="Test" />
+        </toolkit:Accordion>
+        <Separator Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
+        <TextBlock Text="DOWN:" Grid.Row="0" Grid.Column="2" />
+        <controls:Accordion x:Name="myAccordionDown" ExpandDirection="Down" Grid.Column="2" Grid.Row="1" >
+            <controls:AccordionItem  >
+                <controls:AccordionItem.Header >
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1" />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </controls:AccordionItem>
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </controls:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </controls:AccordionItem>
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </controls:AccordionItem>
+
+        </controls:Accordion>
+        <toolkit:Accordion ExpandDirection="Down" Grid.Row="2" Grid.Column="2" >
+            <toolkit:AccordionItem>
+                <toolkit:AccordionItem.Header>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1" Margin="177,0,-177,0" />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </toolkit:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <TextBlock Text="Test" />
+        </toolkit:Accordion>
+        <Separator  Grid.Column="3" Grid.Row="0" Grid.RowSpan="3"/>
+        <TextBlock Text="LEFT:" Grid.Row="0" Grid.Column="4" />
+        <controls:Accordion x:Name="myAccordionLeft" ExpandDirection="Left"  Grid.Column="4" Grid.Row="1" >
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header >
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1"/>
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </controls:AccordionItem>
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </controls:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </controls:AccordionItem>
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </controls:AccordionItem>
+
+        </controls:Accordion>
+        <toolkit:Accordion ExpandDirection="Left" Grid.Row="2" Grid.Column="4" >
+            <toolkit:AccordionItem>
+                <toolkit:AccordionItem.Header>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1" Margin="177,0,-177,0" />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </toolkit:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <TextBlock Text="Test" />
+        </toolkit:Accordion>
+        <Separator  Grid.Column="5" Grid.Row="0" Grid.RowSpan="3"/>
+        <TextBlock Text="RIGHT:" Grid.Row="0" Grid.Column="6" />
+        <controls:Accordion ShowArrow="False" x:Name="myAccordionRight" ExpandDirection="Right"  Grid.Column="6" Grid.Row="1" >
+            <controls:AccordionItem>
+                <controls:AccordionItem.Header >
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1"  />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </controls:AccordionItem>
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </controls:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </controls:AccordionItem>
+            <controls:AccordionItem >
+                <controls:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </controls:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </controls:AccordionItem>
+        </controls:Accordion>
+        <toolkit:Accordion ExpandDirection="Right" Grid.Row="2"  Grid.Column="6" >
+            <toolkit:AccordionItem>
+                <toolkit:AccordionItem.Header>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Content 1" Margin="177,0,-177,0" />
+                        <CheckBox Grid.Column="1" Content="Click"/>
+                    </Grid>
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 1" />
+                    <TextBlock Text="Content 1.1" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 2"/>
+                </toolkit:AccordionItem.Header>
+                <TextBlock Text="Content 2" />
+            </toolkit:AccordionItem>
+            <toolkit:AccordionItem >
+                <toolkit:AccordionItem.Header>
+                    <TextBlock Text="Header 3" />
+                </toolkit:AccordionItem.Header>
+                <StackPanel>
+                    <TextBlock Text="Content 3" />
+                    <TextBlock Text="Content 3.1" />
+                    <TextBlock Text="Content 3.2" />
+                </StackPanel>
+            </toolkit:AccordionItem>
+            <TextBlock Text="Test" />
+        </toolkit:Accordion>
+    </Grid>
+</Window>
