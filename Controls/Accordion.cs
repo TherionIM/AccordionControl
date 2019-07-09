@@ -1,44 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Controls
 {
-    /// <summary>
-    /// Interaction logic for Accordion.xaml
-    /// </summary>
-    public partial class Accordion : ItemsControl
-    {        
+    public class Accordion : ItemsControl
+    {
         public Accordion()
         {
-            InitializeComponent();            
+            Loaded += OnControlLoaded;
         }
+
+        #region methods
+
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+
+            var factoryPanel = new FrameworkElementFactory(typeof(StackPanel));
+            factoryPanel.SetValue(StackPanel.IsItemsHostProperty, true);
+
+            if (ExpandDirection == ExpandDirection.Up || ExpandDirection == ExpandDirection.Down)
+            {
+                factoryPanel.SetValue(StackPanel.OrientationProperty, Orientation.Vertical);
+            }
+            else
+            {
+                factoryPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+            }
+
+            var template = new ItemsPanelTemplate
+            {
+                VisualTree = factoryPanel
+            };
+            ItemsPanel = template;
+        }
+
+        #endregion
 
         #region event handlers
 
         private void OnControlLoaded(object sender, RoutedEventArgs e)
-        {            
+        {
+            var nonAccordionItems = new List<object>();
             foreach (var item in Items)
             {
                 var accordionItem = item as AccordionItem;
                 if (accordionItem != null)
                 {
-                    accordionItem.ArrowVisibility = ShowArrow ? Visibility.Visible : Visibility.Hidden;
-                    accordionItem.Collapse();
-                    accordionItem.OnExpandedEvent += OnAccordionItemExpanded;
-                    accordionItem.OnCollapsedEvent += OnAccordionItemCollapsed;
+                    RegisterAccordionItem(accordionItem);
                 }
+                else
+                {
+                    nonAccordionItems.Add(item);
+                }
+            }
+
+            foreach (var item in nonAccordionItems)
+            {
+                Items.Remove(item); // remove from items
+
+                // create accordion item for it
+                var newAccordionItem = new AccordionItem
+                {
+                    Content = item,
+                    Header = new TextBlock()
+                };
+                Items.Add(newAccordionItem);
+                RegisterAccordionItem(newAccordionItem);
             }
 
             foreach (var item in Items)
@@ -50,6 +80,14 @@ namespace Controls
                     break;
                 }
             }
+        }
+
+        private void RegisterAccordionItem(AccordionItem item)
+        {
+            item.ArrowVisibility = ShowArrow ? Visibility.Visible : Visibility.Hidden;
+            item.Collapse();
+            item.OnExpandedEvent += OnAccordionItemExpanded;
+            item.OnCollapsedEvent += OnAccordionItemCollapsed;
         }
 
         void OnAccordionItemExpanded(AccordionItem expandedItem)
@@ -126,7 +164,6 @@ namespace Controls
             }
         }
 
-        #endregion
+        #endregion        
     }
-
 }

@@ -1,228 +1,223 @@
-﻿<HeaderedContentControl x:Class="Controls.AccordionItem"
+﻿<ResourceDictionary
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Controls"             
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             Loaded="OnAccordionItemControlLoaded"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <HeaderedContentControl.Resources>
-        <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
-        
-        <!-- Animated Expander Button's Template-->
-        <ControlTemplate x:Key="AnimatedExpanderButtonTemp" TargetType="{x:Type local:AccordionItemToggleButton}">
-            <Border x:Name="ExpanderButtonBorder"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition >
-                            <ColumnDefinition.Style>
-                                <Style TargetType="{x:Type ColumnDefinition}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Up">
-                                            <Setter Property="Width" Value="*" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Down">
-                                            <Setter Property="Width" Value="Auto" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Left">
-                                            <Setter Property="Width" Value="Auto" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Right">
-                                            <Setter Property="Width" Value="Auto" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ColumnDefinition.Style>
-                        </ColumnDefinition>
-                        <ColumnDefinition >
-                            <ColumnDefinition.Style>
-                                <Style TargetType="{x:Type ColumnDefinition}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Up">
-                                            <Setter Property="Width" Value="Auto" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Down">
-                                            <Setter Property="Width" Value="*" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Left">
-                                            <Setter Property="Width" Value="*" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Right">
-                                            <Setter Property="Width" Value="*" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ColumnDefinition.Style>
-                        </ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Rectangle Fill="Transparent" Grid.ColumnSpan="2"/>
-                    <Path x:Name="Arrow"                      
-                      Data="M 1,1.5 L 4.5,5 8,1.5"
-                      Stroke="#FF666666"
-                      StrokeThickness="2"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Center"
-                      RenderTransformOrigin="0.5,0.5"
-                      Visibility="{TemplateBinding ArrowVisibility}">                      
-                        <Path.Style>
-                            <Style TargetType="Path">
-                                <Setter Property="RenderTransform">
-                                    <Setter.Value>
-                                        <RotateTransform Angle="0"/>
-                                    </Setter.Value>
-                                </Setter>
+             xmlns:local="clr-namespace:Controls;assembly=Controls"             
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <Duration x:Key="AnimationDuration">0:0:0.2</Duration>
+    <SolidColorBrush x:Key="HeaderColor">#FFDDEEF4</SolidColorBrush>
+    <SolidColorBrush x:Key="BorderColor">#C7C7EF</SolidColorBrush>
+    <local:MultiplyConverter x:Key="multiplyConverter" />
+    
+    <ControlTemplate x:Key="AnimatedExpanderButtonTemp" TargetType="{x:Type local:AccordionItemToggleButton}">
+        <Border x:Name="ExpanderButtonBorder"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                Padding="{TemplateBinding Padding}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition >
+                        <ColumnDefinition.Style>
+                            <Style TargetType="{x:Type ColumnDefinition}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Up">
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <RotateTransform Angle="90"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Grid.Column" Value="1" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Up">
+                                        <Setter Property="Width" Value="*" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Down">
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <RotateTransform Angle="-90"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Grid.Column" Value="0" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Down">
+                                        <Setter Property="Width" Value="Auto" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Left">
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <RotateTransform Angle="270"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Grid.Column" Value="0" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                        <Setter Property="Width" Value="Auto" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Right">
-                                        <Setter Property="RenderTransform">
-                                            <Setter.Value>
-                                                <RotateTransform Angle="-90"/>
-                                            </Setter.Value>
-                                        </Setter>
-                                        <Setter Property="Grid.Column" Value="0" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                        <Setter Property="Width" Value="Auto" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Path.Style>
-                    </Path>
-                    <ContentPresenter x:Name="HeaderContent" Margin="4,0,0,0" ContentSource="Content" >
-                        <ContentPresenter.Style>
-                            <Style TargetType="{x:Type ContentPresenter}">
+                        </ColumnDefinition.Style>
+                    </ColumnDefinition>
+                    <ColumnDefinition >
+                        <ColumnDefinition.Style>
+                            <Style TargetType="{x:Type ColumnDefinition}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Up">
-                                        <Setter Property="Grid.Column" Value="0" />                                            
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Up">
+                                        <Setter Property="Width" Value="Auto" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Down">
-                                        <Setter Property="Grid.Column" Value="1" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Down">
+                                        <Setter Property="Width" Value="*" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Left">
-                                        <Setter Property="Grid.Column" Value="1" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                        <Setter Property="Width" Value="*" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                            AncestorType={x:Type local:Accordion }}}" Value="Right">
-                                        <Setter Property="Grid.Column" Value="1" />
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                        <Setter Property="Width" Value="*" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </ContentPresenter.Style>
-                    </ContentPresenter>
-                </Grid>
-            </Border>
-            <ControlTemplate.Triggers>
-                <!-- Animate arrow when toggled-->                
-                <Trigger Property="IsChecked" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="Arrow"
-                                                 Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
-                                                 By="90"
-                                                 Duration="{StaticResource AnimationDuration}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Setter Property="Background" Value="#FFDDEEF4" TargetName="ExpanderButtonBorder"/>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="Arrow"
-                                                 Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
-                                                 By="-90"                                                 
-                                                 Duration="{StaticResource AnimationDuration}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
+                        </ColumnDefinition.Style>
+                    </ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="Transparent" Grid.ColumnSpan="2"/>
+                <Path x:Name="Arrow"                      
+                    Data="M 1,1.5 L 4.5,5 8,1.5"
+                    Stroke="#FF666666"
+                    StrokeThickness="2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    RenderTransformOrigin="0.5,0.5"
+                    Visibility="{TemplateBinding ArrowVisibility}">
+                    <Path.Style>
+                        <Style TargetType="Path">
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="0"/>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Up">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="90"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Grid.Column" Value="1" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Down">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Grid.Column" Value="0" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="270"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Grid.Column" Value="0" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <RotateTransform Angle="-90"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter Property="Grid.Column" Value="0" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Path.Style>
+                </Path>
+                <ContentPresenter x:Name="HeaderContent" Margin="4,0,0,0" ContentSource="Content" MinHeight="25" >
+                    <ContentPresenter.Style>
+                        <Style TargetType="{x:Type ContentPresenter}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Up">
+                                    <Setter Property="Grid.Column" Value="0" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Down">
+                                    <Setter Property="Grid.Column" Value="1" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                    <Setter Property="Grid.Column" Value="1" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
+                                                                        AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                    <Setter Property="Grid.Column" Value="1" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentPresenter.Style>
+                </ContentPresenter>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <!-- Animate arrow when toggled-->
+            <Trigger Property="IsExpanded" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                By="90"
+                                                Duration="{StaticResource AnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Setter Property="Background" Value="{StaticResource ResourceKey=HeaderColor}" TargetName="ExpanderButtonBorder"/>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="Arrow"
+                                                Storyboard.TargetProperty="(Path.RenderTransform).(RotateTransform.Angle)"
+                                                By="-90"                                                 
+                                                Duration="{StaticResource AnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
 
-                <!-- MouseOver, Pressed behaviours-->
-                <Trigger Property="IsMouseOver"
-                                 Value="true">
-                    <Setter Property="Stroke"
-                                    Value="#222"
-                                    TargetName="Arrow"/>
-                    <Setter Property="Background" Value="#FFDDEEF4" TargetName="ExpanderButtonBorder"/>
-                </Trigger>
-                <Trigger Property="IsPressed"
-                                 Value="true">
-                    <Setter Property="Stroke"
-                                    Value="#FF003366"
-                                    TargetName="Arrow"/>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        
-        <local:MultiplyConverter x:Key="multiplyConverter" />
-        <ControlTemplate x:Key="RevealExpanderTemp" TargetType="{x:Type local:AccordionItem}">
-            <Border BorderBrush="#FFDDEEF4" BorderThickness="1">
+            <!-- MouseOver, Pressed behaviours-->
+            <Trigger Property="IsMouseOver"
+                                Value="true">
+                <Setter Property="Stroke"
+                                Value="#222"
+                                TargetName="Arrow"/>
+                <Setter Property="Background" Value="{StaticResource ResourceKey=HeaderColor}" TargetName="ExpanderButtonBorder"/>
+            </Trigger>
+            <Trigger Property="IsPressed"
+                                Value="true">
+                <Setter Property="Stroke"
+                                Value="#FF003366"
+                                TargetName="Arrow"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+    <ControlTemplate x:Key="RevealExpanderTemp" TargetType="{x:Type local:AccordionItem}">
+        <Border BorderBrush="{StaticResource ResourceKey=BorderColor}" BorderThickness="1">
             <DockPanel>
-                <local:AccordionItemToggleButton x:Name="ExpanderButton"                               
-                              Template="{StaticResource AnimatedExpanderButtonTemp}"
-                              Content="{TemplateBinding Header}"
-                              IsChecked="{Binding Path=IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
-                              OverridesDefaultStyle="True"
-                              Checked="OnToggleButtonChecked"
-                              Unchecked="OnToggleButtonUnChecked"                              
-                              Padding="1.5, 0"
-                              BorderBrush="#FFDDEEF4"
-                              BorderThickness="1"
-                              ArrowVisibility="{Binding Path=ArrowVisibility, RelativeSource={RelativeSource TemplatedParent}}">
+                <local:AccordionItemToggleButton x:Name="ExpanderButton"                            
+                            Template="{StaticResource AnimatedExpanderButtonTemp}"
+                            Content="{TemplateBinding Header}"                            
+                            OverridesDefaultStyle="True"
+                            Command="{Binding Path=ToggleCommand, RelativeSource={RelativeSource TemplatedParent}}"                             
+                            Padding="1.5, 0"
+                            BorderBrush="{StaticResource ResourceKey=BorderColor}"
+                            BorderThickness="1"
+                            ArrowVisibility="{Binding Path=ArrowVisibility, RelativeSource={RelativeSource TemplatedParent}}">
                     <local:AccordionItemToggleButton.Resources>
                         <Style TargetType="{x:Type local:AccordionItemToggleButton}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Right">
                                     <Setter Property="LayoutTransform">
                                         <Setter.Value>
                                             <RotateTransform Angle="-90"/>
                                         </Setter.Value>
-                                    </Setter>                                    
+                                    </Setter>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Left">
                                     <Setter Property="LayoutTransform">
                                         <Setter.Value>
                                             <RotateTransform Angle="90"/>
@@ -230,19 +225,19 @@
                                     </Setter>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Up">
-                                    <Setter Property="DockPanel.Dock" Value="Bottom" />                                        
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Up">
+                                    <Setter Property="DockPanel.Dock" Value="Bottom" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Down">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Down">
                                     <Setter Property="DockPanel.Dock" Value="Top" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Left">
                                     <Setter Property="DockPanel.Dock" Value="Right" />
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Right">
                                     <Setter Property="DockPanel.Dock" Value="Left" />
                                 </DataTrigger>
                             </Style.Triggers>
@@ -250,32 +245,32 @@
                     </local:AccordionItemToggleButton.Resources>
                 </local:AccordionItemToggleButton>
                 <ScrollViewer x:Name="ExpanderContentScrollView"
-                              HorizontalScrollBarVisibility="Hidden"
-                              VerticalScrollBarVisibility="Hidden"
-                              HorizontalContentAlignment="Stretch"
-                              VerticalContentAlignment="Bottom" >
+                            HorizontalScrollBarVisibility="Hidden"
+                            VerticalScrollBarVisibility="Hidden"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Bottom" >
                     <ScrollViewer.Tag>
                         <sys:Double>0.0</sys:Double>
                     </ScrollViewer.Tag>
                     <ContentPresenter x:Name="ExpanderContent" ContentSource="Content"/>
                     <ScrollViewer.Resources>
                         <Style TargetType="ScrollViewer">
-                            <Style.Triggers>                                
+                            <Style.Triggers>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Up">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Up">
                                     <Setter Property="DockPanel.Dock" Value="Top" />
                                     <Setter Property="VerticalContentAlignment" Value="Top" />
                                     <Setter Property="Height">
-                                        <Setter.Value>                                            
+                                        <Setter.Value>
                                             <MultiBinding Converter="{StaticResource multiplyConverter}">
                                                 <Binding Path="ActualHeight" ElementName="ExpanderContent"/>
                                                 <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                                            </MultiBinding>                                            
+                                            </MultiBinding>
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Down">
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Down">
                                     <Setter Property="DockPanel.Dock" Value="Bottom" />
                                     <Setter Property="VerticalContentAlignment" Value="Bottom" />
                                     <Setter Property="Height">
@@ -288,8 +283,8 @@
                                     </Setter>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Left">
-                                    <Setter Property="DockPanel.Dock" Value="Right" />                                    
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Left">
+                                    <Setter Property="DockPanel.Dock" Value="Right" />
                                     <Setter Property="Width">
                                         <Setter.Value>
                                             <MultiBinding Converter="{StaticResource multiplyConverter}">
@@ -300,8 +295,8 @@
                                     </Setter>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding ExpandDirection, RelativeSource={RelativeSource Mode=FindAncestor, 
-                                                                    AncestorType={x:Type local:Accordion }}}" Value="Right">
-                                    <Setter Property="DockPanel.Dock" Value="Left" />                                    
+                                                                AncestorType={x:Type local:Accordion }}}" Value="Right">
+                                    <Setter Property="DockPanel.Dock" Value="Left" />
                                     <Setter Property="Width">
                                         <Setter.Value>
                                             <MultiBinding Converter="{StaticResource multiplyConverter}">
@@ -316,35 +311,30 @@
                     </ScrollViewer.Resources>
                 </ScrollViewer>
             </DockPanel>
-            </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsExpanded" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="ExpanderContentScrollView"
-                                                 Storyboard.TargetProperty="Tag"                                                 
-                                                 To="1"
-                                                 Duration="{StaticResource AnimationDuration}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetName="ExpanderContentScrollView"
-                                                 Storyboard.TargetProperty="Tag"                                                 
-                                                 To="0"
-                                                 Duration="{StaticResource AnimationDuration}"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-        
-        <Style TargetType="{x:Type local:AccordionItem}">
-            <Setter Property="Template" Value="{StaticResource ResourceKey=RevealExpanderTemp}" />            
-        </Style>
-    </HeaderedContentControl.Resources>
-</HeaderedContentControl>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ExpanderContentScrollView"
+                                                Storyboard.TargetProperty="Tag"                                                 
+                                                To="1"
+                                                Duration="{StaticResource AnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="ExpanderContentScrollView"
+                                                Storyboard.TargetProperty="Tag"                                                 
+                                                To="0"
+                                                Duration="{StaticResource AnimationDuration}"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+</ResourceDictionary>

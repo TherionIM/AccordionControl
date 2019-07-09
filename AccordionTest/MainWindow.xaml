@@ -7,18 +7,19 @@
         WindowStartupLocation="CenterScreen">    
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="15"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="15"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="15"/>
-            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="151*"/>
-            <RowDefinition Height="149*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="UP:" />        
         <controls:Accordion x:Name="myAccordionUp" ExpandDirection="Up" Grid.Row="1" Grid.Column="0">
@@ -56,7 +57,8 @@
             </controls:AccordionItem>           
             <TextBlock Text="Test" />
         </controls:Accordion>
-        <toolkit:Accordion ExpandDirection="Up" Grid.Row="2" Grid.Column="0">
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Toolkit" />
+        <toolkit:Accordion ExpandDirection="Up" Grid.Row="3" Grid.Column="0">
             <toolkit:AccordionItem>
                 <toolkit:AccordionItem.Header>
                     <Grid>
@@ -128,7 +130,8 @@
             </controls:AccordionItem>
 
         </controls:Accordion>
-        <toolkit:Accordion ExpandDirection="Down" Grid.Row="2" Grid.Column="2" >
+        <TextBlock Text="Toolkit" Grid.Row="2" Grid.Column="2" />
+        <toolkit:Accordion ExpandDirection="Down" Grid.Row="3" Grid.Column="2" >
             <toolkit:AccordionItem>
                 <toolkit:AccordionItem.Header>
                     <Grid >
@@ -200,7 +203,8 @@
             </controls:AccordionItem>
 
         </controls:Accordion>
-        <toolkit:Accordion ExpandDirection="Left" Grid.Row="2" Grid.Column="4" >
+        <TextBlock Text="Toolkit" Grid.Row="2" Grid.Column="4" />
+        <toolkit:Accordion ExpandDirection="Left" Grid.Row="3" Grid.Column="4" >
             <toolkit:AccordionItem>
                 <toolkit:AccordionItem.Header>
                     <Grid >
@@ -237,7 +241,7 @@
         </toolkit:Accordion>
         <Separator  Grid.Column="5" Grid.Row="0" Grid.RowSpan="3"/>
         <TextBlock Text="RIGHT:" Grid.Row="0" Grid.Column="6" />
-        <controls:Accordion ShowArrow="False" x:Name="myAccordionRight" ExpandDirection="Right"  Grid.Column="6" Grid.Row="1" >
+        <controls:Accordion ShowArrow="False" x:Name="myAccordionRight" ExpandDirection="Right" Grid.Column="6" Grid.Row="1" >
             <controls:AccordionItem>
                 <controls:AccordionItem.Header >
                     <Grid >
@@ -271,7 +275,8 @@
                 </StackPanel>
             </controls:AccordionItem>
         </controls:Accordion>
-        <toolkit:Accordion ExpandDirection="Right" Grid.Row="2"  Grid.Column="6" >
+        <TextBlock Text="Toolkit" Grid.Row="2" Grid.Column="6" />
+        <toolkit:Accordion ExpandDirection="Right" Grid.Row="3" Grid.Column="6" >
             <toolkit:AccordionItem>
                 <toolkit:AccordionItem.Header>
                     <Grid >

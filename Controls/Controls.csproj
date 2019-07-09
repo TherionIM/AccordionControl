@@ -45,24 +45,17 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Accordion.xaml.cs">
-      <DependentUpon>Accordion.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="AccordionHost.cs" />
-    <Compile Include="AccordionItem.xaml.cs">
-      <DependentUpon>AccordionItem.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Accordion.cs" />
+    <Compile Include="AccordionItem.cs" />
+    <Compile Include="AccordionItemToggleButton.cs" />
+    <Compile Include="MultiplyConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Accordion.xaml">
+    <Resource Include="AccordionItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AccordionItem.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    </Resource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
